@@ -1,0 +1,42 @@
+<div class="form">
+  <div class="titulo">
+    <h1>{{titulo}}</h1>
+    <p>Suscribirse al newsletter a continuación:</p>
+  </div>
+  
+  <div class="entradas">
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Juan Pérez" autocomplete="off" autofocus><br><br>
+    <label for="nombre">E-Mail:</label>
+    <input type="email" name="mail" [(ngModel)]="email" placeholder="jp@mail.com" autocomplete="off">
+  </div><br>
+  
+  <div class="botones">
+    <button (click)="registrarUsuario()">Suscribirse</button>
+    <button *ngIf="registrado" (click)="eliminarUsuario()">Dejar de suscribirse</button>
+  </div>
+
+  <ng-template #sinRegistrar>
+    <p><b>Estado:</b> No suscrito</p>
+  </ng-template>
+
+  <div *ngIf="registrado; else sinRegistrar" class="mensaje-suscripcion">
+    <p>{{mensajeRegistro}}</p>
+  </div>
+  <div *ngIf="personas.length > 0" class="listado-suscritos">
+    <div class="titulo-suscritos">
+      <h2>Suscritos al newsletter</h2>
+    </div>
+    <div class="lista">
+      <ul>
+        <li *ngFor="let persona of personas">
+          <p><b>Nombre:</b> {{persona.nombre}}</p>
+          <p><b>E-Mail:</b> {{persona.mail}}</p>
+        </li>
+      </ul>
+      <div class="boton-reset">
+        <button (click)="limpiarLista()">Limpiar lista</button>
+      </div>
+    </div>
+  </div>
+</div>
